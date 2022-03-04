@@ -7,40 +7,40 @@ import model.Invoice;
 
 public class SecondAssignment {
 
-    public static void main(String[] args){
-        String[] customerName = {"John", "Max", "Phil", "Roger", "Yae", "Doe", "William"};
+    public static void main(String[] args) {
+        String[] customerName = { "John", "Max", "Phil", "Roger", "Yae", "Doe", "William" };
 
         List<Invoice> invoices = AddDummyData();
-        
+
         List<Invoice> oracleAndTrainingInvoices = invoices.stream()
-                                                    .filter(invoice -> {
-                                                        for (String name : customerName) {
-                                                            if(invoice.getCustomer() == name){
-                                                                return true;
-                                                            }
-                                                        }
-                                                        return false;
-                                                    })
-                                                    .filter(invoice -> invoice.getTitle().contains("Training"))
-                                                    .sorted(Comparator.comparingInt(Invoice::getAmount)
-		                                            .reversed())
-                                                    .collect(Collectors.toList());
+                .filter(invoice -> {
+                    for (String name : customerName) {
+                        if (invoice.getCustomer() == name) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .filter(invoice -> invoice.getTitle().contains("Training"))
+                .sorted(Comparator.comparingInt(Invoice::getAmount)
+                        .reversed())
+                .collect(Collectors.toList());
 
         List<Integer> ids = oracleAndTrainingInvoices.stream()
-                            .map(invoice -> invoice.getId())
-                            .collect(Collectors.toList());
+                .map(invoice -> invoice.getId())
+                .collect(Collectors.toList());
 
         List<Integer> firstFiveIds = oracleAndTrainingInvoices.stream()
-                            .map(invoice -> invoice.getId())
-                            .limit(5)
-                            .collect(Collectors.toList());
-        
+                .map(invoice -> invoice.getId())
+                .limit(5)
+                .collect(Collectors.toList());
+
         System.out.println(ids);
         System.out.println(firstFiveIds);
 
     }
 
-    public static List<Invoice>  AddDummyData() {
+    public static List<Invoice> AddDummyData() {
         List<Invoice> invoices = new ArrayList<>();
 
         invoices.add(new Invoice());
@@ -48,7 +48,7 @@ public class SecondAssignment {
         invoices.get(0).setId(1);
         invoices.get(0).setAmount(100);
         invoices.get(0).setTitle("Training");
-        
+
         invoices.add(new Invoice());
         invoices.get(1).setCustomer("Max");
         invoices.get(1).setId(2);
@@ -104,8 +104,7 @@ public class SecondAssignment {
         invoices.get(9).setTitle("Master");
 
         return invoices;
-        
+
     }
-   
-    
+
 }
